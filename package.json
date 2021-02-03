@@ -1,0 +1,22 @@
+{
+  "name": "vaster",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^2.6.1",
+    "valid-url": "^1.0.9",
+    "xml2js": "^0.4.23"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.5.8",
+    "@types/xml2js": "^0.4.8",
+    "@vercel/node": "^1.9.0",
+    "add": "^2.0.6"
+  }
+}
