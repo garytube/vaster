@@ -41,6 +41,12 @@
     padding: 0.5rem;
     text-align: center;
   }
+
+  pre#preview {
+    text-align: left;
+    font-size: 12px;
+    line-height: 1.5em;
+  }
 </style>
 
 <body>
@@ -49,107 +55,32 @@
     <a target="_blank" id="link">Targ ein Link ein</a><br>
     <input type="text" id="input" placeholder="http://.... .xml">
     <code><pre>Beispiel: <br> https://imagesrv.adition.com/banners/3086/dbt/aldi/vast/Sued_1080x1920.xml</pre></code>
+
+    <code>
+      <pre id="preview">
+
+      </pre>
+    </code>
   </div>
 
 
-  <div class="content">
-    <pre><code>
-    Work it
-    Make it
-    Do it
-    Makes us
-    Harder
-    Better
-    <strong>Vaster</strong>
-    Stronger
-    More than
-    Hour
-    Hour
-    Never
-    Ever
-    After
-    Work is
-    Over
-    Work it
-    Make it
-    Do it
-    Makes us
-    Harder
-    Better
-    <strong>Vaster</strong>
-    Stronger
-    Work it harder, make it better
-    Do it <strong>Vaster</strong>, makes us stronger
-    More than ever, hour after hour
-    Work is never over
-    Work it harder, make it better
-    Do it <strong>Vaster</strong>, makes us stronger
-    More than ever, hour after hour
-    Work is never over
-    Work it harder, make it better
-    Do it <strong>Vaster</strong>, makes us stronger
-    More than ever, hour after hour
-    Work is never over
-    Work it harder, make it better
-    Do it <strong>Vaster</strong>, makes us stronger
-    More than ever, hour after hour
-    Work is never over
-    Work it harder, make it better
-    Do it <strong>Vaster</strong>, makes us stronger
-    More than ever, hour after hour
-    Work is never over
-    Work it harder, make it better
-    Do it <strong>Vaster</strong>, makes us
-    More than ever hour after hour
-    Work is never over
-    Work it harder, make it better
-    Do it <strong>Vaster</strong>, makes us stronger
-    More than ever, hour after hour
-    Work is never over
-    Work it harder, make it
-    Do it <strong>Vaster</strong>, makes us
-    More than ever, hour after hour
-    Work is never over
-    Work it harder, make it better
-    Do it <strong>Vaster</strong>, makes us strong
-    More than ever, hour after hour
-    Work is never over
-    Work it, make it better
-    Do it <strong>Vaster</strong> makes us stronger
-    More than ever, hour after hour
-    Work is never over
-    Work it, make it better
-    Do it <strong>Vaster</strong> makes us stronger
-    More than ever, hour after hour
-    Work is never over
-    Work it, make it better
-    Do it <strong>Vaster</strong> makes us stronger
-    More than ever, hour after hour
-    Work is never over
-    Work it harder
-    Do it <strong>Vaster</strong>
-    More than ever, hour
-    Work is never over
-    Work it harder, make it better
-    Do it <strong>Vaster</strong> makes us stronger
-    More than ever hour after hour
-    Work is never over
-  </code></pre>
-    <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/9sjWU5dGcGI?controls=0" frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen></iframe>
-  </div>
 
   <script>
     const link = document.querySelector('#link')
     const input = document.querySelector('#input')
+    const preview = document.querySelector('#preview')
 
     const basePath = window.location + 'api/vaster?target='
 
     input.addEventListener('keyup', (e) => {
       const target = basePath + e.target.value
-      link.innerHTML = target
+      link.innerHTML = target.trim()
       link.setAttribute('href', target)
+    })
+
+
+    input.addEventListener('change', e => {
+      fetch(e.target.value).then(res => res.text()).then(data => preview.innerText = data)
     })
 
 
