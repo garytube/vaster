@@ -16,6 +16,11 @@
     grid-gap: 10;
   }
 
+  code {
+    width: 100%;
+    overflow: auto;
+  }
+
   input {
     width: 90%;
     max-width: 600px;
@@ -47,6 +52,17 @@
     font-size: 12px;
     line-height: 1.5em;
   }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 5px;
+  }
+
+  video {
+    max-height: 60%;
+    width: 100%;
+  }
 </style>
 
 <body>
@@ -55,12 +71,15 @@
     <a target="_blank" id="link">Targ ein Link ein</a><br>
     <input type="text" id="input" placeholder="http://.... .xml">
     <code><pre>Beispiel: <br> https://imagesrv.adition.com/banners/3086/dbt/aldi/vast/Sued_1080x1920.xml</pre></code>
+    <div class="grid">
 
-    <code>
-      <pre id="preview">
-
-      </pre>
-    </code>
+      <code>
+    <pre id="preview">
+      
+    </pre>
+  </code>
+      <video id="video" src="" muted autoplay loop preload="auto"></video>
+    </div>
   </div>
 
 
@@ -71,6 +90,7 @@
     const preview = document.querySelector('#preview')
 
     const basePath = window.location + 'api/vaster?target='
+    const previewPath = window.location + 'api/vaster/preview?target='
 
     input.addEventListener('keyup', (e) => {
       const target = basePath + e.target.value
@@ -80,7 +100,15 @@
 
 
     input.addEventListener('change', e => {
-      fetch(e.target.value).then(res => res.text()).then(data => preview.innerText = data)
+      fetch(e.target.value).then(res => res.text()).then(data => preview.innerText = data).then(() => {
+        const preview = previewPath + e.target.value
+        debugger
+        fetch(preview).then(res => res.text()).then(videoSrc => {
+          const video = document.querySelector('#video')
+          video.setAttribute('src', videoSrc)
+          video.play()
+        })
+      })
     })
 
 
